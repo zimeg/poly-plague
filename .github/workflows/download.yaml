@@ -29,4 +29,4 @@ jobs:
         run: |
           git add ./public/stats-history.json
           git commit -m "👁‍🗨 data updated"
-          git push origin github-action-fixes
+          git push origin main
