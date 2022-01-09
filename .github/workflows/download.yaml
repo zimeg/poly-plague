@@ -11,17 +11,14 @@ jobs:
         run: |
           rm ./public/stats-history.json
           node ./utils/downloadData.mjs
-      
-      - name: check git diff
-        run: git diff
-      
+
       - name: configure git profile
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
       
       - name: commit new data
-        if: git diff | wc -l > 0
+        if: $(git diff | wc -l) > 0
         run: |
           git add ./public/stats-history.json
           git commit -m "👁‍🗨 data updated"
