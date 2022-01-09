@@ -1,9 +1,32 @@
 name: Download data
-on: push # temporary, for testing this script
+on:
+  schedule:
+    - cron: '10 * * * *' # run on poly time
 jobs:
   download-data:
     runs-on: ubuntu-latest
     steps:
-      - run: rm ./public/stats-history.json
-      - run: node ./utils/downloadData.mjs
-      - run: cat ./public/stats-history.json
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: download most recent data
+        run: |
+          rm ./public/stats-history.json
+          node ./utils/downloadData.mjs
+      
+      - name: calculate diff
+        id: git-diff
+        run: echo "::set-output name=line-count::$(git diff | wc -l)"
+
+      - name: configure git profile
+        if: steps.git-diff.outputs.line-count > 0
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+      
+      - name: commit new data
+        if: steps.git-diff.outputs.line-count > 0
+        run: |
+          git add ./public/stats-history.json
+          git commit -m "👁‍🗨 data updated"
+          git push origin main
