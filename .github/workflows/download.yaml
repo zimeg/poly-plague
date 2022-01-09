@@ -1,5 +1,7 @@
 name: Download data
-on: push # temporary, for testing this script
+on:
+  schedule:
+    - cron: '10 * * * *' # run on poly time
 jobs:
   download-data:
     runs-on: ubuntu-latest
