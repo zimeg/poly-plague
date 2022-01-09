@@ -17,6 +17,7 @@ jobs:
         run: echo "::set-output name=line-count::$(git diff | wc -l)"
 
       - name: configure git profile
+        if: steps.git-diff.outputs.line-count > 0
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
