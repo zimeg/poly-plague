@@ -4,8 +4,12 @@ jobs:
   download-data:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: echo $GITHUB_ACTION_PATH
-      - run: rm ./public/stats-history.json
-      - run: node ./utils/downloadData.mjs
-      - run: cat ./public/stats-history.json
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: download most recent data
+        run: rm ./public/stats-history.json
+        run: node ./utils/downloadData.mjs
+      
+      - name: check git diff
+        run: git diff
