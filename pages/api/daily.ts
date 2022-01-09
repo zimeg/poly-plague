@@ -13,7 +13,7 @@ export default async function handler(
 ) {
   await runMiddleware(req, res, cors);
 
-  const stats = await import('./stats-history.json');
+  const stats = await import('../../public/stats-history.json');
   const data = stats.default;
   const dailyData = mapToDaily(data);
 

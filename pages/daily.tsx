@@ -314,7 +314,7 @@ const Daily = (props: DailyData) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const example = await import('./api/stats-history.json');
+  const example = await import('../public/stats-history.json');
   const data = example.default;
   const dailyData = mapToDaily(data);
 
