@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - cat: echo $GITHUB_ACTION_PATH
+      - run: echo $GITHUB_ACTION_PATH
       - run: rm ./public/stats-history.json
       - run: node ./utils/downloadData.mjs
       - run: cat ./public/stats-history.json
