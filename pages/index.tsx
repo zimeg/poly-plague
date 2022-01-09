@@ -109,11 +109,10 @@ const Home = (props: DailyData) => {
         <div className="sm:px-14 md:px-30 lg:px-40 xl:px-56 space-y-4">
           <section className="px-2 space-y-2">
             <h2 className="bg-green-900 text-xl pl-2 py-2 mb-2">☄️ quick stats</h2>
-            <p>Aggregated data to get a sense of how we&apos;re doing as a campus.</p>
           </section>
 
           <section className="px-2 w-full">
-            <div className="text-center font-bold">🌡 postivite tests</div>
+            <div className="text-center font-bold">🌡 positive tests</div>
             <div className="flex w-full text-center font-bold py-1 space-x-2">
               <span className="w-1/5">&nbsp;</span>
               <span className="flex w-3/5 text-center px-1">
