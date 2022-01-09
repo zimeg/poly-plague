@@ -1,0 +1,9 @@
+name: Download data
+on: push # temporary, for testing this script
+jobs:
+  download-data:
+    runs-on: ubuntu-latest
+    steps:
+      - run: rm ./public/stats-history.json
+      - run: node ./utils/downloadData.mjs
+      - run: cat ./public/stats-history.json
