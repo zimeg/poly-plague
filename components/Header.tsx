@@ -20,16 +20,16 @@ const Header = () => (
       <div className="space-x-6">
         <Link href="/">
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <a className="hover:underline">
-            <span className="sm:hidden">📺 dashboard</span>
-            <span className="hidden sm:inline-block">dashboard 📺</span>
+          <a>
+            <span className="sm:hidden hover:underline">📺 dashboard</span>
+            <span className="hidden sm:inline-block hover:underline">dashboard 📺</span>
           </a>
         </Link>
         <Link href="/daily">
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <a className="hover:underline">
-            <span className="sm:hidden">🗄 daily data</span>
-            <span className="hidden sm:inline-block">daily data 🗄</span>
+          <a>
+            <span className="sm:hidden hover:underline">🗄 daily data</span>
+            <span className="hidden sm:inline-block hover:underline">daily data 🗄</span>
           </a>
         </Link>
       </div>
