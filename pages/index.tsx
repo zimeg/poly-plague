@@ -1,23 +1,20 @@
 import Head from 'next/head';
 import { useState } from 'react';
+import Disclaimer from '../components/Disclaimer';
 import Chart from '../components/Chart';
-import { DailyData, GraphingData } from '../types';
+import { DailyData, RawGraphingData } from '../types';
 import mapToDaily from '../utils/mapToDaily';
 
 const Home = (props: DailyData) => {
   const { days, lastUpdated } = props;
 
-  const [showPositive, togglePositive] = useState(true);
-  const [showPerformed, togglePerformed] = useState(true);
-  const [startIndex, setStartIndex] = useState(Object.keys(days).length - 31);
   const [showOnCampus, toggleOnCampus] = useState(false);
 
-  const graphingData = Object.keys(days).map((d) => {
-    const day: GraphingData = { day: d };
-    if (showPositive) day.positiveTests = days[d].positiveTests;
-    if (showPerformed) day.performedTests = days[d].performedTests;
-    return day;
-  }).reverse();
+  const graphingData: RawGraphingData[] = Object.keys(days).map((date) => ({
+    date,
+    positiveTests: days[date].positiveTests,
+    performedTests: days[date].performedTests,
+  })).reverse();
 
   const stats = Object.keys(days).map((d) => days[d]);
 
@@ -29,82 +26,9 @@ const Home = (props: DailyData) => {
       </Head>
 
       <main className="py-8 space-y-8">
-        <div className="sm:px-14 md:px-30 lg:px-40 xl:px-56 space-y-8">
-          <section className="px-2 space-y-2">
-            <h2 className="bg-green-900 text-xl pl-2 py-2 mb-2">📺 dashboard</h2>
-            <p>
-              All data is sourced from the
-              {' '}
-              <a
-                href="https://coronavirus.calpoly.edu/dashboard"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:underline font-bold"
-              >
-                Cal Poly Coronavirus Campus Dashboard&nbsp;🔗
-              </a>
-              {' '}
-              but may not be up-to-date with the data provided by Campus Health and
-              Wellbeing. See the Campus Dashboard for the most recent information.
-            </p>
+        <Disclaimer lastUpdated={lastUpdated} />
 
-            <p className="text-gray-400 italic">{`data last updated: ${lastUpdated}`}</p>
-          </section>
-        </div>
-
-        <Chart data={graphingData} startIndex={startIndex} />
-
-        <div className="sm:px-14 md:px-30 lg:px-40 xl:px-56 xl:flex space-y-8 xl:space-y-0">
-          <section className="px-2 space-y-2 xl:w-1/2">
-            <h2 className="bg-yellow-900 text-lg pl-2 py-1 mb-2">🔍 views</h2>
-            <p className="text-neutral-400 italic">use the slider above to specify a date range</p>
-            <div className="space-x-2">
-              <button
-                type="button"
-                onClick={() => setStartIndex(graphingData.length - 8)}
-                className="bg-neutral-600 px-4 py-1 rounded-sm"
-              >
-                7 days
-              </button>
-              <button
-                type="button"
-                onClick={() => setStartIndex(graphingData.length - 31)}
-                className="bg-neutral-600 px-4 py-1 rounded-sm"
-              >
-                30 days
-              </button>
-              <button
-                type="button"
-                onClick={() => setStartIndex(graphingData.length - 91)}
-                className="bg-neutral-600 px-4 py-1 rounded-sm"
-              >
-                90 days
-              </button>
-              <button
-                type="button"
-                onClick={() => setStartIndex(0)}
-                className="bg-neutral-600 px-4 py-1 rounded-sm"
-              >
-                all
-              </button>
-            </div>
-          </section>
-
-          <section className="px-2 space-y-2 xl:w-1/2">
-            <h2 className="bg-yellow-900 text-lg pl-2 py-1 mb-2">🗂 toggle data</h2>
-
-            <div>
-              <input type="checkbox" id="performedVisibility" onChange={() => togglePerformed(!showPerformed)} checked={false || showPerformed} />
-              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-              <label htmlFor="performedVisibility"> show performed tests</label>
-            </div>
-            <div>
-              <input type="checkbox" id="positiveVisibility" onChange={() => togglePositive(!showPositive)} checked={false || showPositive} />
-              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-              <label htmlFor="positiveVisibility"> show positive tests</label>
-            </div>
-          </section>
-        </div>
+        <Chart data={graphingData} />
 
         <div className="sm:px-14 md:px-30 lg:px-40 xl:px-56 space-y-4">
           <section className="px-2 space-y-2">

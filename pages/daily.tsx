@@ -3,6 +3,7 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { DailyData } from '../types';
 import mapToDaily from '../utils/mapToDaily';
+import Disclaimer from '../components/Disclaimer';
 
 const Daily = (props: DailyData) => {
   const { lastUpdated, days } = props;
@@ -108,24 +109,9 @@ const Daily = (props: DailyData) => {
       </Head>
 
       <main className="py-8 space-y-8">
+        <Disclaimer lastUpdated={lastUpdated} />
         <div className="sm:px-14 md:px-30 lg:px-40 xl:px-56 space-y-8">
           <section className="px-2 space-y-2">
-            <h2 className="bg-green-900 text-xl pl-2 py-2 mb-2">🗄 daily data</h2>
-            <p>
-              All data is sourced from the
-              {' '}
-              <a
-                href="https://coronavirus.calpoly.edu/dashboard"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:underline font-bold"
-              >
-                Cal Poly Coronavirus Campus Dashboard&nbsp;🔗
-              </a>
-              {' '}
-              but may not be up-to-date with the data provided by Campus Health and
-              Wellbeing. See the Campus Dashboard for the most recent information.
-            </p>
             <p>
               If you wish to use this data, you can download it from the Campus Dashboard or use
               the endpoint found at
@@ -134,8 +120,6 @@ const Daily = (props: DailyData) => {
               <a href="/api/daily" className="bg-neutral-700 font-mono px-1 py-0.5 rounded-md text-sm">/api/daily</a>
               .
             </p>
-
-            <p className="text-gray-400 italic">{`data last updated: ${lastUpdated}`}</p>
           </section>
 
           <div className="xl:flex space-y-8 xl:space-y-0">

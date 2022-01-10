@@ -18,9 +18,16 @@ export interface DailyData {
 }
 
 export interface GraphingData {
-  day: string;
-  positiveTests?: Number;
-  performedTests?: Number;
+  date: string;
+  'Positive tests'?: Number;
+  'Performed tests'?: Number;
+  'Daily positivity'?: Number;
+}
+
+export interface RawGraphingData {
+  date: string;
+  positiveTests: Number;
+  performedTests: Number;
 }
 
 export interface InputData {
