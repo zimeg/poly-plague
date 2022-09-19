@@ -4,7 +4,7 @@ a re-visualized version of the data from https://coronavirus.calpoly.edu/dashboa
 
 ## an archival note
 
-new builds for [the poly plague site][poly_plague] begin breaking only days after being released due to a change in the structure of downloaded data. a quarter system's pace and a broken spirit left me with little energy towards making a fix, however the repository was untouched as data continued to be downloaded and committed by the "GitHub Actions Bot".
+new builds for [the poly plague site][poly_plague] began breaking only days after being released due to a change in the structure of downloaded data. a quarter system's pace and a broken spirit left me with little energy towards making a fix, however the repository was untouched as data continued to be downloaded and committed by the "GitHub Actions Bot".
 
 each day of data downloaded by the bot can be found in [the commit history][commit_history].
 
